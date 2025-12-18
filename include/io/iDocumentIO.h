@@ -1,9 +1,9 @@
 #pragma once
+
 #include <memory>
 #include <string>
 
 class Document;
-
 class IDocumentIO {
 public:
     virtual ~IDocumentIO() = default;
