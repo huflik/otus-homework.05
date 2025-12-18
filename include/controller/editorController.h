@@ -4,6 +4,7 @@
 #include "io/iDocumentIO.h"
 #include "model/line.h"
 #include "model/circle.h"
+#include "model/rectangle.h"
 
 class EditorController {
 public:
@@ -26,24 +27,32 @@ public:
         }
     }
 
-    void addLine() {
-        verifyDocument();
-        document_->add(std::make_shared<Line>());
-        std::cout << "Add Line" << std::endl;
-    }
-
-    void addCircle() {
-        verifyDocument();
-        document_->add(std::make_shared<Circle>());
-        std::cout << "Add Circle" << std::endl;
-    }
-
     void removePrimitive(std::size_t indx) {
         if(document_) {
             document_->remove(indx);
             std::cout << "Remove primitive" << std::endl;
         }
     }
+
+    void addLine() {
+        verifyDocument();
+        document_->add(std::make_shared<Line>());
+    }
+
+    void addCircle() {
+        verifyDocument();
+        document_->add(std::make_shared<Circle>());
+    }
+
+        void addRectangle() {
+        verifyDocument();
+        document_->add(std::make_shared<Rectangle>());
+    }
+
+    const Document* document() const {
+        return document_.get();
+    }
+
 
 private:
     std::shared_ptr<Document> document_;

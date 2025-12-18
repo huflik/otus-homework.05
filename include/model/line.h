@@ -3,5 +3,7 @@
 
 class Line : public Primitive {
 public:
-    void draw() const override {}
+    void draw() const override {
+        std::cout << "line renderer" << std::endl;
+    }
 };

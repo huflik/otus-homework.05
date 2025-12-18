@@ -1,25 +1,27 @@
 #include <iostream>
 #include "controller/editorController.h"
-#include "io/fileDocumentIO.h"
+#include "view/plugDocumentRenderer.h"
+#include <io/fileDocumentIO.h>
 
-void guiNew(EditorController& controller) {controller.newDocument();}
-void guiLoad(EditorController& controller) {controller.load("document.in");}
-void guiSave(EditorController& controller) {controller.save("document.out");}
-void guiAddLine(EditorController& controller) {controller.addLine();}
-void guiAddCircle(EditorController& controller) {controller.addCircle();}
-void guiDelete(EditorController& controller) {controller.removePrimitive(0);}
-
+void guiRender(const EditorController& controller, const IDocumentRenderer& renderer) {
+    if(auto doc = controller.document()) {
+        renderer.render(*doc);
+    }
+}
 int main() {
 
     auto io = std::make_shared<FileDocumentIO>();
     EditorController controller(io);
+    PlugDocumentRenderer renderer;
 
-    guiNew(controller);
-    guiAddLine(controller);
-    guiAddCircle(controller);
-    guiSave(controller);
-    guiDelete(controller);
-    guiLoad(controller);
-
+    controller.newDocument();
+    controller.addCircle();
+    controller.addLine();
+    controller.addRectangle();
+    guiRender(controller, renderer);
+    controller.save("plug.jpg");  
+    controller.removePrimitive(0);
+    guiRender(controller, renderer);
+    
     return 0;
 }
