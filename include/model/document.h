@@ -10,13 +10,11 @@ public:
 
     void add(PrimitivePtr primitive) {
         primitives_.push_back(std::move(primitive));
-                    std::cout << "Add primitive" << std::endl;
     }
 
     void remove(std::size_t indx) {
         if(indx < primitives_.size()) {
-            primitives_.erase(primitives_.begin() + indx);
-            std::cout << "Remove primitive" << std::endl;
+            primitives_.erase(primitives_.begin() + indx);          
         }
     }
 
